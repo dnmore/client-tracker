@@ -1,5 +1,7 @@
 
 import prisma from "@/lib/prisma";
+import { columns } from "./columns";
+import { DataTable } from "@/components/ui/data-table";
 
 export default async function Page() {
   const allLeads = await prisma.lead.findMany({
@@ -8,25 +10,16 @@ export default async function Page() {
       name: true,
       company: true,
       email: true,
-      _count: {
-        select: {
-          deals: true,
-        },
-      },
+      
     },
   });
 
   return (
     <div>
       <h1 className="text-2xl font-semibold">Leads</h1>
-      <ul>
-        {allLeads.map((lead) => (
-          <li key={lead.id}>
-            {lead.name} – {lead.company} – {lead.email} –{" "}
-            Deals: {lead._count.deals}
-          </li>
-        ))}
-      </ul>
+       <div className="container mx-auto py-10">
+      <DataTable columns={columns} data={allLeads} />
+    </div>
     </div>
   );
 }
