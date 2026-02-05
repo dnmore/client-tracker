@@ -1,3 +1,4 @@
+import prisma from "@/lib/prisma";
 import EditLeadForm from "@/components/leads/edit-lead";
 import { notFound } from "next/navigation";
 export default async function Page(props: { params: Promise<{ id: string }> }){
