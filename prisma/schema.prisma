@@ -55,7 +55,7 @@ model Lead {
   id        String   @id @default(uuid())
   name      String
   email     String   @unique
-  company   String?
+  company   String
   createdAt DateTime @default(now())
 
   deals     Deal[]
