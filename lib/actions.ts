@@ -70,6 +70,7 @@ export async function createLead(prevState: LeadState, formData: FormData) {
     },
   });
   revalidatePath("/dashboard/leads");
+  revalidatePath("/dashboard");
   redirect("/dashboard/leads");
 }
 
@@ -107,6 +108,7 @@ export async function createDeal(prevState: DealState, formData: FormData) {
     },
   });
   revalidatePath("/dashboard/deals");
+   revalidatePath("/dashboard");
   redirect("/dashboard/deals");
 }
 
@@ -116,6 +118,7 @@ export async function deleteLead(leadId: string) {
     where: { id: leadId },
   });
   revalidatePath("/dashboard/leads");
+   revalidatePath("/dashboard");
   redirect("/dashboard/leads");
 }
 
@@ -124,6 +127,7 @@ export async function deleteDeal(dealId: string) {
     where: { id: dealId },
   });
   revalidatePath("/dashboard/deals");
+   revalidatePath("/dashboard");
   redirect("/dashboard/deals");
 }
 export async function updateLead(leadId: string, formData: FormData, prevState: LeadState) {
@@ -156,6 +160,7 @@ export async function updateLead(leadId: string, formData: FormData, prevState: 
     },
   });
   revalidatePath("/dashboard/leads");
+    revalidatePath("/dashboard");
   redirect("/dashboard/leads");
 }
 
@@ -194,5 +199,6 @@ export async function updateDeal(dealId: string, formData: FormData, prevState: 
     },
   });
   revalidatePath("/dashboard/deals");
+    revalidatePath("/dashboard");
   redirect("/dashboard/deals");
 }
