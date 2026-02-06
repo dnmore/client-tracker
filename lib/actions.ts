@@ -1,7 +1,8 @@
 "use server";
 
 import prisma from "@/lib/prisma";
-import { revalidatePath } from "next/cache";
+
+import { revalidateTag } from "next/cache";
 import { redirect } from "next/navigation";
 import { z } from "zod";
 
@@ -69,8 +70,9 @@ export async function createLead(prevState: LeadState, formData: FormData) {
       company: company,
     },
   });
-  revalidatePath("/dashboard/leads");
-  revalidatePath("/dashboard");
+ 
+  revalidateTag("leads", 'max');
+revalidateTag("dashboard", 'max');
   redirect("/dashboard/leads");
 }
 
@@ -107,8 +109,9 @@ export async function createDeal(prevState: DealState, formData: FormData) {
       },
     },
   });
-  revalidatePath("/dashboard/deals");
-   revalidatePath("/dashboard");
+ 
+   revalidateTag("deals", 'max');
+revalidateTag("dashboard", 'max');
   redirect("/dashboard/deals");
 }
 
@@ -117,8 +120,9 @@ export async function deleteLead(leadId: string) {
   await prisma.lead.delete({
     where: { id: leadId },
   });
-  revalidatePath("/dashboard/leads");
-   revalidatePath("/dashboard");
+ 
+   revalidateTag("leads", 'max');
+revalidateTag("dashboard", 'max');
   redirect("/dashboard/leads");
 }
 
@@ -126,8 +130,9 @@ export async function deleteDeal(dealId: string) {
   await prisma.deal.delete({
     where: { id: dealId },
   });
-  revalidatePath("/dashboard/deals");
-   revalidatePath("/dashboard");
+  
+   revalidateTag("deals", 'max');
+revalidateTag("dashboard", 'max');
   redirect("/dashboard/deals");
 }
 export async function updateLead(leadId: string, formData: FormData, prevState: LeadState) {
@@ -159,8 +164,9 @@ export async function updateLead(leadId: string, formData: FormData, prevState: 
       company: company,
     },
   });
-  revalidatePath("/dashboard/leads");
-    revalidatePath("/dashboard");
+ 
+   revalidateTag("leads", 'max');
+revalidateTag("dashboard", 'max');
   redirect("/dashboard/leads");
 }
 
@@ -198,7 +204,8 @@ export async function updateDeal(dealId: string, formData: FormData, prevState: 
       },
     },
   });
-  revalidatePath("/dashboard/deals");
-    revalidatePath("/dashboard");
+ 
+   revalidateTag("deals", 'max');
+revalidateTag("dashboard", 'max');
   redirect("/dashboard/deals");
 }

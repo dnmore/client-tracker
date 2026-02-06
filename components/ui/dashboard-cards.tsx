@@ -1,4 +1,5 @@
 import prisma from "@/lib/prisma";
+import { getDashboardStats } from "@/lib/data";
 import { Card, CardContent, CardHeader, CardTitle } from "./card";
 import { HugeiconsIcon } from '@hugeicons/react';
 import { LayerIcon, Chart01Icon , ArrowUp02Icon,  ArrowDown02Icon, User03Icon,  Invoice01Icon  } from '@hugeicons/core-free-icons';
@@ -14,32 +15,8 @@ billing: Invoice01Icon
 
 export default async function DashboardCards() {
   const [totalDeals, totalRevenue, totalDealsWon, totalDealsLost, totalLeads] =
-    await Promise.all([
-      prisma.deal.count(),
-
-      prisma.deal.aggregate({
-        where: {
-          stage: "WON",
-        },
-        _sum: {
-          amount: true,
-        },
-      }),
-
-      prisma.deal.count({
-        where: {
-          stage: "WON",
-        },
-      }),
-
-      prisma.deal.count({
-        where: {
-          stage: "LOST",
-        },
-      }),
-
-      prisma.lead.count(),
-    ]);
+    await getDashboardStats()
+;
   return (
     <div className="grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-6 grid">
       <DashboardCard title="Deals Created" value={totalDeals} type="deals" className="text-indigo-500" />
