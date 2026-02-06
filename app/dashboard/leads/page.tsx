@@ -1,19 +1,14 @@
 
-import prisma from "@/lib/prisma";
+
 import { columns } from "./columns";
 import { DataTable } from "@/components/ui/data-table";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { getLeadsTableData } from "@/lib/data";
+
+
 export default async function Page() {
-  const allLeads = await prisma.lead.findMany({
-    select: {
-      id: true,
-      name: true,
-      company: true,
-      email: true,
-      
-    },
-  });
+  const allLeads = await getLeadsTableData()
 
   return (
     <div>
