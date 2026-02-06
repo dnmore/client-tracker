@@ -1,14 +1,10 @@
 import prisma from "@/lib/prisma";
 import EditDealForm from "@/components/deals/edit-deal";
 import { notFound } from "next/navigation";
+import { getLeadsSelectOptions } from "@/lib/data";
 export default async function Page(props: { params: Promise<{ id: string }> }){
     const { id } = await props.params;
-    const leadsData = await prisma.lead.findMany({
-        select: {
-          id: true,
-          name: true,
-        },
-      });
+    const leadsData = await getLeadsSelectOptions();
 
     const dealToUpdate = await prisma?.deal.findUnique({
         where: { id: id },

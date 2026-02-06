@@ -27,3 +27,9 @@ export function SkeletonCard() {
     </Card>
   );
 }
+
+export function SidebarSkeleton(){
+  return(
+     <aside className="h-screen w-16 md:w-64 border-r bg-muted" />
+  )
+}
