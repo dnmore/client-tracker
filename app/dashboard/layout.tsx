@@ -4,7 +4,7 @@ import { Suspense } from "react";
 import SidebarSkeleton from "@/components/dashboard/dashboard-skeleton";
 
 
-export default async function DashboardLayout({
+export default function DashboardLayout({
   children,
 }: {
   children: React.ReactNode;

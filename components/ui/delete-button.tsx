@@ -45,7 +45,8 @@ export function DeleteDeal({ id }: { id: string }) {
   const deleteDealWithId = deleteDeal.bind(null, id);
 
   return (
-    <AlertDialog>
+    <AlertDialog >
+     
       <AlertDialogTrigger className="text-sm px-2 cursor-pointer hover:text-red-500">
         <HugeiconsIcon icon={Trash} className="ml-2 h-4 w-4" />
       </AlertDialogTrigger>
@@ -58,12 +59,16 @@ export function DeleteDeal({ id }: { id: string }) {
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <form action={deleteDealWithId}>
+          <div>
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
+          </div>
+          
+           <form action={deleteDealWithId}>
             <AlertDialogAction type="submit">Continue</AlertDialogAction>
-          </form>
+         </form>
         </AlertDialogFooter>
       </AlertDialogContent>
+      
     </AlertDialog>
   );
 }
