@@ -13,8 +13,9 @@ import {
 import { HugeiconsIcon } from "@hugeicons/react";
 import { Trash } from "@hugeicons/core-free-icons";
 
-export function DeleteLead({ id }: { id: string }) {
+export function DeleteLead({ id, role }: { id: string; role: "OWNER" | "VIEWER" }) {
   const deleteLeadWithId = deleteLead.bind(null, id);
+  const isOwner = role === "OWNER";
 
   return (
     <AlertDialog>
@@ -27,12 +28,17 @@ export function DeleteLead({ id }: { id: string }) {
           <AlertDialogDescription>
             This action cannot be undone. This will permanently delete your
             entry.
+            {!isOwner && (
+              <p className="mt-2 text-xs text-red-600">
+                You have view-only access. Only Owners can delete leads.
+              </p>
+            )}
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
           <form action={deleteLeadWithId}>
-            <AlertDialogAction type="submit">Continue</AlertDialogAction>
+            <AlertDialogAction type="submit" disabled={!isOwner}>Continue</AlertDialogAction>
           </form>
         </AlertDialogFooter>
       </AlertDialogContent>
@@ -41,9 +47,9 @@ export function DeleteLead({ id }: { id: string }) {
 }
 
 
-export function DeleteDeal({ id }: { id: string }) {
+export function DeleteDeal({ id, role }: { id: string, role: "OWNER" | "VIEWER" }) {
   const deleteDealWithId = deleteDeal.bind(null, id);
-
+const isOwner = role === "OWNER";
   return (
     <AlertDialog >
      
@@ -56,6 +62,11 @@ export function DeleteDeal({ id }: { id: string }) {
           <AlertDialogDescription>
             This action cannot be undone. This will permanently delete your
             entry.
+             {!isOwner && (
+              <p className="mt-2 text-xs text-red-600">
+                You have view-only access. Only Owners can delete deals.
+              </p>
+            )}
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
@@ -64,7 +75,7 @@ export function DeleteDeal({ id }: { id: string }) {
           </div>
           
            <form action={deleteDealWithId}>
-            <AlertDialogAction type="submit">Continue</AlertDialogAction>
+            <AlertDialogAction type="submit" disabled={!isOwner}>Continue</AlertDialogAction>
          </form>
         </AlertDialogFooter>
       </AlertDialogContent>

@@ -20,8 +20,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { GuardedButton } from "../ui/guarded-button";
 
-export default function EditDealForm({deal, leadsOptions}: {deal: Deal, leadsOptions: LeadSelectOption[]}) {
+export default function EditDealForm({deal, leadsOptions, role}: {deal: Deal, leadsOptions: LeadSelectOption[], role: "OWNER" | "VIEWER"}) {
   const initialState: DealState = {
     message: null,
     errors: {},
@@ -135,7 +136,9 @@ export default function EditDealForm({deal, leadsOptions}: {deal: Deal, leadsOpt
               <Link href="/dashboard/deals">Cancel</Link>
             </Button>
 
-            <Button type="submit">Save</Button>
+           <GuardedButton role={role} requiredRole="OWNER">
+              Save
+            </GuardedButton>
           </CardFooter>
         </form>
       </CardContent>

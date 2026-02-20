@@ -1,8 +1,9 @@
-import prisma from "@/lib/prisma";
+
 import { getDashboardStats } from "@/lib/data";
 import { Card, CardContent, CardHeader, CardTitle } from "./card";
 import { HugeiconsIcon } from '@hugeicons/react';
 import { LayerIcon, Chart01Icon , ArrowUp02Icon,  ArrowDown02Icon, User03Icon,  Invoice01Icon  } from '@hugeicons/core-free-icons';
+import { verifySession } from "@/lib/dal";
 
 const iconMap = {
 deals:LayerIcon,
@@ -16,6 +17,8 @@ billing: Invoice01Icon
 export default async function DashboardCards() {
   const [totalDeals, totalRevenue, totalDealsWon, totalDealsLost, totalLeads] =
     await getDashboardStats()
+    const session = await verifySession();
+  const userPlan = session.user?.plan || "Free";
 ;
   return (
     <div className="grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-6 grid">
@@ -29,7 +32,7 @@ export default async function DashboardCards() {
       <DashboardCard title="Deals Won" value={totalDealsWon} type="won" className="text-green-500" />
       <DashboardCard title="Deals Lost" value={totalDealsLost} type="lost" className="text-red-500"/>
       <DashboardCard title="Leads Created" value={totalLeads} type="leads" className="text-blue-500" />
-       <DashboardCard title="Billing" value="Free" type="billing" className="text-stone-500" />
+       <DashboardCard title="Billing" value={userPlan} type="billing" className="text-stone-500" />
     </div>
   );
 }

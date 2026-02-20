@@ -5,9 +5,11 @@ import { DataTable } from "@/components/ui/data-table";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { getLeadsTableData } from "@/lib/data";
+import { verifySession } from "@/lib/dal";
 
 
 export default async function Page() {
+  const session = await verifySession();
   const allLeads = await getLeadsTableData()
 
   return (
@@ -20,7 +22,7 @@ export default async function Page() {
       </div>
       
        <div className="container mx-auto py-10">
-      <DataTable columns={columns} data={allLeads} />
+      <DataTable columns={columns} data={allLeads}  role={session.user.role} />
     </div>
     </div>
   );
