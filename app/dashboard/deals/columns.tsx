@@ -55,8 +55,10 @@ export const columns: ColumnDef<DealTableRaw>[] = [
   },
    {
     id: "actions",
-    cell: ({ row }) => {
+    cell: ({ row, table }) => {
       const deal = row.original
+      const role = table.options.meta?.role as "OWNER" | "VIEWER";
+
  
       return (
         <div className=" flex justify-between gap-2">
@@ -64,7 +66,7 @@ export const columns: ColumnDef<DealTableRaw>[] = [
             <HugeiconsIcon icon={PencilEdit02Icon} className="ml-2 h-4 w-4" />
           </Link>
 
-          <DeleteDeal id={deal.id} />
+          <DeleteDeal id={deal.id} role={role}/>
         </div>
       )
     },

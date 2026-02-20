@@ -1,8 +1,10 @@
 import prisma from "@/lib/prisma";
+import { verifySession } from "@/lib/dal";
 import EditDealForm from "@/components/deals/edit-deal";
 import { notFound } from "next/navigation";
 import { getLeadsSelectOptions } from "@/lib/data";
 export default async function Page(props: { params: Promise<{ id: string }> }){
+  const session = await verifySession(); 
     const { id } = await props.params;
     const leadsData = await getLeadsSelectOptions();
 
@@ -17,7 +19,7 @@ export default async function Page(props: { params: Promise<{ id: string }> }){
     return (<div className="pt-6">
           <h1 className="mb-2 text-xl md:text-2xl ml-1">Edit Deal</h1>
           <div className="container py-10 max-w-lg">
-            <EditDealForm deal={dealToUpdate} leadsOptions={leadsData}/>
+            <EditDealForm deal={dealToUpdate} leadsOptions={leadsData} role={session.user.role}/>
           </div>
         </div>)
 }

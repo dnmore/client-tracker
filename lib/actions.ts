@@ -1,8 +1,8 @@
 "use server";
 
 import prisma from "@/lib/prisma";
-
-import { revalidateTag } from "next/cache";
+import { requireOwner } from "@/lib/auth-guards";
+import { revalidateTag, revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { z } from "zod";
 
@@ -43,6 +43,8 @@ export type DealState = {
 };
 
 export async function createLead(prevState: LeadState, formData: FormData) {
+  await requireOwner();
+
   const rawData = {
     name: formData.get("name"),
     email: formData.get("email"),
@@ -70,13 +72,15 @@ export async function createLead(prevState: LeadState, formData: FormData) {
       company: company,
     },
   });
- 
-  revalidateTag("leads", 'max');
-revalidateTag("dashboard", 'max');
+
+  revalidateTag("leads", "max");
+  revalidateTag("dashboard", "max");
+  revalidatePath("/dashboard/leads");
   redirect("/dashboard/leads");
 }
 
 export async function createDeal(prevState: DealState, formData: FormData) {
+  await requireOwner();
   const rawData = {
     name: formData.get("name"),
     amount: formData.get("amount"),
@@ -109,33 +113,42 @@ export async function createDeal(prevState: DealState, formData: FormData) {
       },
     },
   });
- 
-   revalidateTag("deals", 'max');
-revalidateTag("dashboard", 'max');
+
+  revalidateTag("deals", "max");
+  revalidateTag("dashboard", "max");
+  revalidatePath("/dashboard/deals");
   redirect("/dashboard/deals");
 }
 
-
 export async function deleteLead(leadId: string) {
+  await requireOwner();
   await prisma.lead.delete({
     where: { id: leadId },
   });
- 
-   revalidateTag("leads", 'max');
-revalidateTag("dashboard", 'max');
+
+  revalidateTag("leads", "max");
+  revalidateTag("dashboard", "max");
+  revalidatePath("/dashboard/leads");
   redirect("/dashboard/leads");
 }
 
 export async function deleteDeal(dealId: string) {
+  await requireOwner();
   await prisma.deal.delete({
     where: { id: dealId },
   });
-  
-   revalidateTag("deals", 'max');
-revalidateTag("dashboard", 'max');
+
+  revalidateTag("deals", "max");
+  revalidateTag("dashboard", "max");
+  revalidatePath("/dashboard/deals");
   redirect("/dashboard/deals");
 }
-export async function updateLead(leadId: string, formData: FormData, prevState: LeadState) {
+export async function updateLead(
+  leadId: string,
+  formData: FormData,
+  prevState: LeadState,
+) {
+  await requireOwner();
   const rawData = {
     name: formData.get("name"),
     email: formData.get("email"),
@@ -164,14 +177,20 @@ export async function updateLead(leadId: string, formData: FormData, prevState: 
       company: company,
     },
   });
- 
-   revalidateTag("leads", 'max');
-revalidateTag("dashboard", 'max');
+
+  revalidateTag("leads", "max");
+  revalidateTag("dashboard", "max");
+  revalidatePath("/dashboard/leads");
   redirect("/dashboard/leads");
 }
 
-export async function updateDeal(dealId: string, formData: FormData, prevState: LeadState) {
-   const rawData = {
+export async function updateDeal(
+  dealId: string,
+  formData: FormData,
+  prevState: LeadState,
+) {
+  await requireOwner();
+  const rawData = {
     name: formData.get("name"),
     amount: formData.get("amount"),
     stage: formData.get("stage"),
@@ -194,7 +213,7 @@ export async function updateDeal(dealId: string, formData: FormData, prevState: 
   const { name, amount, stage, leadId } = validatedFields.data;
 
   await prisma.deal.update({
-     where: { id: dealId },
+    where: { id: dealId },
     data: {
       name: name,
       amount: amount,
@@ -204,8 +223,9 @@ export async function updateDeal(dealId: string, formData: FormData, prevState: 
       },
     },
   });
- 
-   revalidateTag("deals", 'max');
-revalidateTag("dashboard", 'max');
+
+  revalidateTag("deals", "max");
+  revalidateTag("dashboard", "max");
+  revalidatePath("/dashboard/deals");
   redirect("/dashboard/deals");
 }

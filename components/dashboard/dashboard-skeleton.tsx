@@ -33,3 +33,10 @@ export function SidebarSkeleton(){
      <aside className="h-screen w-16 md:w-64 border-r bg-muted" />
   )
 }
+
+
+export function NavbarSkeleton(){
+  return(
+    <nav className="h-16 w-full border-b bg-muted" />
+  )
+}

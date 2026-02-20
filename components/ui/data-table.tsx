@@ -26,17 +26,27 @@ import {
   TableRow,
 } from "@/components/ui/table"
 
+import { RowData } from "@tanstack/react-table"
+
+declare module "@tanstack/react-table" {
+  interface TableMeta<TData extends RowData> {
+    role: "OWNER" | "VIEWER"
+  }
+}
 
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
   
   data: TData[]
+  
+  role: "OWNER" | "VIEWER"
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
+  role,
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = React.useState<SortingState>([])
    const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
@@ -58,6 +68,9 @@ export function DataTable<TData, TValue>({
       columnFilters,
       
     },
+     meta: {
+    role,  
+  },
   })
 
   return (

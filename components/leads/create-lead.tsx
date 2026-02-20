@@ -9,8 +9,9 @@ import { Field, FieldGroup } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
+import { GuardedButton } from "../ui/guarded-button";
 
-export default function CreateLeadForm() {
+export default function CreateLeadForm({ role }: { role: "OWNER" | "VIEWER" }) {
   const initialState: LeadState = {
     message: null,
     errors: {},
@@ -86,7 +87,9 @@ export default function CreateLeadForm() {
               <Link href="/dashboard/leads">Cancel</Link>
             </Button>
 
-            <Button type="submit">Save</Button>
+            <GuardedButton role={role} requiredRole="OWNER">
+              Save
+            </GuardedButton>
           </CardFooter>
         </form>
       </CardContent>

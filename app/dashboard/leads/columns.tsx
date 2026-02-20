@@ -11,6 +11,9 @@ import { Button } from "@/components/ui/button";
 
 import { LeadTableRaw } from "@/lib/definitions";
 
+
+
+
 export const columns: ColumnDef<LeadTableRaw>[] = [
   {
     accessorKey: "name",
@@ -46,8 +49,9 @@ export const columns: ColumnDef<LeadTableRaw>[] = [
   },
   {
     id: "actions",
-    cell: ({ row }) => {
+    cell: ({ row, table }) => {
       const lead = row.original;
+      const role = table.options.meta?.role as "OWNER" | "VIEWER";
 
       return (
         <div className=" flex justify-between gap-2">
@@ -55,7 +59,7 @@ export const columns: ColumnDef<LeadTableRaw>[] = [
             <HugeiconsIcon icon={PencilEdit02Icon} className="ml-2 h-4 w-4" />
           </Link>
 
-          <DeleteLead id={lead.id} />
+          <DeleteLead id={lead.id} role={role}/>
         </div>
       );
     },
