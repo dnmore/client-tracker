@@ -78,6 +78,9 @@ model User {
   emailVerified DateTime? @map("email_verified")
   image         String?
   role           Role     @default(OWNER)
+  stripeCustomerId String? @unique
+  stripeSubscriptionId String?
+  subscriptionStatus String?
   plan           Plan     @default(FREE)
   accounts      Account[]
   sessions      Session[]
