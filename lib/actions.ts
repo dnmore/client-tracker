@@ -80,7 +80,21 @@ export async function createLead(prevState: LeadState, formData: FormData) {
 }
 
 export async function createDeal(prevState: DealState, formData: FormData) {
-  await requireOwner();
+  const isOwner = await requireOwner();
+  const user = await prisma.user.findUnique({
+    where: {id: isOwner.user.id}
+  });
+  if(user?.plan === "FREE"){
+    const dealCount = await prisma.deal.count();
+    if(dealCount >= 5){
+      return {
+        errors: {
+          name: ["Free plan limit reached. Upgrade to Pro."],
+        },
+        message: "Failed to Create Deal.",
+      };
+    }
+  }
   const rawData = {
     name: formData.get("name"),
     amount: formData.get("amount"),
