@@ -13,23 +13,39 @@ import {
 import { HugeiconsIcon } from "@hugeicons/react";
 import { Trash } from "@hugeicons/core-free-icons";
 
-export function DeleteLead({ id, role }: { id: string; role: "OWNER" | "VIEWER" }) {
+export function DeleteLead({
+  id,
+  role,
+}: {
+  id: string;
+  role: "OWNER" | "VIEWER";
+}) {
   const deleteLeadWithId = deleteLead.bind(null, id);
   const isOwner = role === "OWNER";
 
   return (
     <AlertDialog>
-      <AlertDialogTrigger className="text-sm px-2 cursor-pointer hover:text-red-500">
-        <HugeiconsIcon icon={Trash} className="ml-2 h-4 w-4" />
+      <AlertDialogTrigger asChild>
+        <button
+          type="button"
+          aria-label="Delete lead"
+          className="p-2 rounded-md cursor-pointer hover:text-red-500"
+        >
+          <HugeiconsIcon icon={Trash} className="h-5 w-5" aria-hidden="true" />
+          <span className="sr-only">Delete lead</span>
+        </button>
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+          <AlertDialogTitle> Delete lead?</AlertDialogTitle>
           <AlertDialogDescription>
-            This action cannot be undone. This will permanently delete your
-            entry.
+            This will permanently delete this lead. This action cannot be
+            undone.
             {!isOwner && (
-              <p className="mt-2 text-xs text-red-600">
+              <p
+                className="mt-2 text-xs text-red-600"
+                id="delete-permission-warning"
+              >
                 You have view-only access. Only Owners can delete leads.
               </p>
             )}
@@ -38,7 +54,15 @@ export function DeleteLead({ id, role }: { id: string; role: "OWNER" | "VIEWER" 
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
           <form action={deleteLeadWithId}>
-            <AlertDialogAction type="submit" disabled={!isOwner}>Continue</AlertDialogAction>
+            <AlertDialogAction
+              type="submit"
+              disabled={!isOwner}
+              aria-describedby={
+                !isOwner ? "delete-permission-warning" : undefined
+              }
+            >
+              Continue
+            </AlertDialogAction>
           </form>
         </AlertDialogFooter>
       </AlertDialogContent>
@@ -46,41 +70,59 @@ export function DeleteLead({ id, role }: { id: string; role: "OWNER" | "VIEWER" 
   );
 }
 
-
-export function DeleteDeal({ id, role }: { id: string, role: "OWNER" | "VIEWER" }) {
+export function DeleteDeal({
+  id,
+  role,
+}: {
+  id: string;
+  role: "OWNER" | "VIEWER";
+}) {
   const deleteDealWithId = deleteDeal.bind(null, id);
-const isOwner = role === "OWNER";
+  const isOwner = role === "OWNER";
   return (
-    <AlertDialog >
-     
-      <AlertDialogTrigger className="text-sm px-2 cursor-pointer hover:text-red-500">
-        <HugeiconsIcon icon={Trash} className="ml-2 h-4 w-4" />
+    <AlertDialog>
+      <AlertDialogTrigger asChild>
+        <button
+          type="button"
+          aria-label="Delete deal"
+          className="p-2 rounded-md cursor-pointer hover:text-red-500"
+        >
+          <HugeiconsIcon icon={Trash} className="h-5 w-5" aria-hidden="true" />
+          <span className="sr-only">Delete deal</span>
+        </button>
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+          <AlertDialogTitle>Delete deal?</AlertDialogTitle>
           <AlertDialogDescription>
-            This action cannot be undone. This will permanently delete your
-            entry.
-             {!isOwner && (
-              <p className="mt-2 text-xs text-red-600">
+            This will permanently delete this deal. This action cannot be
+            undone.
+            {!isOwner && (
+              <p
+                className="mt-2 text-xs text-red-600"
+                id="delete-permission-warning"
+              >
                 You have view-only access. Only Owners can delete deals.
               </p>
             )}
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <div>
-            <AlertDialogCancel>Cancel</AlertDialogCancel>
-          </div>
-          
-           <form action={deleteDealWithId}>
-            <AlertDialogAction type="submit" disabled={!isOwner}>Continue</AlertDialogAction>
-         </form>
+          <AlertDialogCancel>Cancel</AlertDialogCancel>
+
+          <form action={deleteDealWithId}>
+            <AlertDialogAction
+              type="submit"
+              disabled={!isOwner}
+              aria-describedby={
+                !isOwner ? "delete-permission-warning" : undefined
+              }
+            >
+              Continue
+            </AlertDialogAction>
+          </form>
         </AlertDialogFooter>
       </AlertDialogContent>
-      
     </AlertDialog>
   );
 }
-

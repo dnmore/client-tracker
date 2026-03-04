@@ -46,7 +46,7 @@ export function Sidebar() {
   const pathname = usePathname();
 
   return (
-    <aside className="flex h-screen w-16 flex-col border-r bg-background md:w-64">
+    <aside className="flex h-screen w-16 flex-col border-r bg-background md:w-64" aria-label="Sidebar">
       
       <div className="flex h-14 items-center justify-center border-b md:justify-start md:px-6">
         <HugeiconsIcon icon={Chart01Icon} className="m-4 h-8 w-8 md:hidden" />
@@ -55,19 +55,21 @@ export function Sidebar() {
       </div>
 
       <TooltipProvider delayDuration={0}>
-        <nav className="flex flex-1 flex-col gap-1 p-2">
+        <nav className="flex flex-1 flex-col gap-1 p-2"  aria-label="Dashboard navigation">
           {links.map(({ name, href, icon: Icon }) => {
             const link = (
               <Link
                 href={href}
+                 aria-label={name}
+                aria-current={pathname === href ? "page" : undefined}
                 className={clsx(
-                  "group flex h-10 items-center justify-center gap-3 rounded-md text-sm font-medium bg-muted text-foreground transition-colors md:justify-start md:px-3",
+                  "group flex h-10 items-center justify-center gap-3 rounded-md text-sm bg-background text-foreground hover:bg-muted transition-colors md:justify-start md:px-3",
                   {
-                    "text-muted-foreground hover:bg-muted hover:text-foreground":
+                    "font-bold bg-muted":
                       pathname === href,
                   },
                 )}
-              ><HugeiconsIcon icon={Icon} className="h-6 w-6" />
+              ><HugeiconsIcon icon={Icon} aria-hidden="true" className="h-6 w-6" />
                
                 <span className="hidden md:inline">{name}</span>
               </Link>
