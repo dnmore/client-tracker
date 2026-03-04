@@ -1,4 +1,4 @@
-
+import type { Metadata } from "next";
 import { columns } from "./columns";
 import { DataTable } from "@/components/ui/data-table";
 import { Button } from "@/components/ui/button";
@@ -6,6 +6,9 @@ import Link from "next/link";
 import { getDealsTableData } from "@/lib/data";
 import { verifySession } from "@/lib/dal";
 
+export const metadata: Metadata = {
+  title: 'Deals',
+};
 
 export default async function Page() {
     const session = await verifySession();

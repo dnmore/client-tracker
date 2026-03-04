@@ -1,5 +1,5 @@
 
-
+import type { Metadata } from "next";
 import { columns } from "./columns";
 import { DataTable } from "@/components/ui/data-table";
 import { Button } from "@/components/ui/button";
@@ -7,7 +7,9 @@ import Link from "next/link";
 import { getLeadsTableData } from "@/lib/data";
 import { verifySession } from "@/lib/dal";
 
-
+export const metadata: Metadata = {
+  title: 'Leads',
+};
 export default async function Page() {
   const session = await verifySession();
   const allLeads = await getLeadsTableData()

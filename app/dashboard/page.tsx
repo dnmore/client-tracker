@@ -1,8 +1,11 @@
+import type { Metadata } from "next";
 import { Suspense } from "react";
 import DashboardSkeleton from "@/components/dashboard/dashboard-skeleton";
 import DashboardCards from "@/components/ui/dashboard-cards";
 
-
+export const metadata: Metadata = {
+  title: 'Dashboard',
+};
 export default async function Page() {
 
   

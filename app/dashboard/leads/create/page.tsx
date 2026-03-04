@@ -1,5 +1,10 @@
+import type { Metadata } from "next";
 import { verifySession } from "@/lib/dal";
 import CreateLeadForm from "@/components/leads/create-lead";
+
+export const metadata: Metadata = {
+  title: 'Create Lead',
+};
 
 export default async function Page() {
   const session = await verifySession();

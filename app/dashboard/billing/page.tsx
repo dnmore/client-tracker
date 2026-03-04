@@ -1,5 +1,10 @@
+import type { Metadata } from "next";
 import { verifySession } from "@/lib/dal";
 import { UpgradeButton, ManageBillingButton } from "@/components/billing/billing-components";
+
+export const metadata: Metadata = {
+  title: 'Billing',
+};
 
 export default async function Page() {
     const session = await verifySession();

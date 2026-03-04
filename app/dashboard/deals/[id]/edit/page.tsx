@@ -1,8 +1,13 @@
+import type { Metadata } from "next";
 import prisma from "@/lib/prisma";
 import { verifySession } from "@/lib/dal";
 import EditDealForm from "@/components/deals/edit-deal";
 import { notFound } from "next/navigation";
 import { getLeadsSelectOptions } from "@/lib/data";
+
+export const metadata: Metadata = {
+  title: 'Edit Deal',
+};
 export default async function Page(props: { params: Promise<{ id: string }> }){
   const session = await verifySession(); 
     const { id } = await props.params;

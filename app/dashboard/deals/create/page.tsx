@@ -1,7 +1,11 @@
+import type { Metadata } from "next";
 import { verifySession } from "@/lib/dal";
 import CreateDealForm from "@/components/deals/create-deal";
 import { getLeadsSelectOptions } from "@/lib/data";
 
+export const metadata: Metadata = {
+  title: 'Create Deal',
+};
 export default async function Page() {
   const session = await verifySession();
   const leadsData = await getLeadsSelectOptions();

@@ -1,7 +1,12 @@
+import type { Metadata } from "next";
 import prisma from "@/lib/prisma";
 import { verifySession } from "@/lib/dal";
 import EditLeadForm from "@/components/leads/edit-lead";
 import { notFound } from "next/navigation";
+
+export const metadata: Metadata = {
+  title: 'Edit Lead',
+};
 export default async function Page(props: { params: Promise<{ id: string }> }){
   
   const { id } = await props.params;
