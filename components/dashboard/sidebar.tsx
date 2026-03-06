@@ -5,7 +5,8 @@ import { usePathname } from "next/navigation";
 import { clsx } from "clsx";
 
 import { HugeiconsIcon } from '@hugeicons/react';
-import { DashboardSquare01Icon, UserGroupIcon, Agreement02Icon, CreditCardIcon, Settings01Icon, Chart01Icon } from '@hugeicons/core-free-icons';
+import { DashboardSquare01Icon, UserGroupIcon, Agreement02Icon, CreditCardIcon, Chart01Icon } from '@hugeicons/core-free-icons';
+
 
 import {
   Tooltip,
@@ -35,18 +36,14 @@ const links = [
     href: "/dashboard/billing",
     icon: CreditCardIcon,
   },
-  {
-    name: "Settings",
-    href: "/dashboard/settings",
-    icon: Settings01Icon,
-  },
+  
 ];
 
 export function Sidebar() {
   const pathname = usePathname();
 
   return (
-    <aside className="flex h-screen w-16 flex-col border-r bg-background md:w-64" aria-label="Sidebar">
+    <aside className="flex h-auto w-16 flex-col border-r bg-background md:w-64" aria-label="Sidebar">
       
       <div className="flex h-14 items-center justify-center border-b md:justify-start md:px-6">
         <HugeiconsIcon icon={Chart01Icon} className="m-4 h-8 w-8 md:hidden" />
@@ -85,6 +82,7 @@ export function Sidebar() {
               </Tooltip>
             );
           })}
+          
         </nav>
       </TooltipProvider>
     </aside>
