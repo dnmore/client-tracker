@@ -54,7 +54,7 @@ export const columns: ColumnDef<LeadTableRaw>[] = [
         <div className=" flex justify-between gap-2">
           <Link
             href={`/dashboard/leads/${lead.id}/edit`}
-            className="p-2 text-black hover:text-blue-600"
+            className="p-2  hover:text-blue-600"
           >
             <HugeiconsIcon
               icon={Edit03Icon}

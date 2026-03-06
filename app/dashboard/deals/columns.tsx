@@ -62,7 +62,7 @@ export const columns: ColumnDef<DealTableRaw>[] = [
  
       return (
         <div className=" flex justify-between gap-2">
-          <Link href={`/dashboard/deals/${deal.id}/edit`} className="p-2 text-black hover:text-blue-600">
+          <Link href={`/dashboard/deals/${deal.id}/edit`} className="p-2  hover:text-blue-600">
             <HugeiconsIcon icon={Edit03Icon} className="ml-2 h-5 w-5"   aria-hidden="true" />
              <span className="sr-only">
     Edit {deal.name}

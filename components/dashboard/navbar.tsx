@@ -11,6 +11,7 @@ import type { Session } from "next-auth";
 import { Badge } from "@/components/ui/badge";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { UserIcon } from "@hugeicons/core-free-icons";
+import { ModeToggle } from "../ui/mode-toggle";
 
 type NavbarProps = {
   session: Session;
@@ -46,6 +47,10 @@ export async function Navbar({ session }: NavbarProps) {
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
+        <div className="pl-4">
+          <ModeToggle />
+        </div>
+        
       </div>
     </header>
   );
