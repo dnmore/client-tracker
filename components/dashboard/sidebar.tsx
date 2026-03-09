@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { clsx } from "clsx";
 
 import { HugeiconsIcon } from '@hugeicons/react';
-import { DashboardSquare01Icon, UserGroupIcon, Agreement02Icon, CreditCardIcon, Chart01Icon } from '@hugeicons/core-free-icons';
+import { DashboardSquare01Icon, UserGroupIcon, Agreement02Icon, CreditCardIcon, ThreeDRotateIcon } from '@hugeicons/core-free-icons';
 
 
 import {
@@ -46,7 +46,7 @@ export function Sidebar() {
     <aside className="flex h-auto w-16 flex-col border-r bg-background md:w-64" aria-label="Sidebar">
       
       <div className="flex h-14 items-center justify-center border-b md:justify-start md:px-6">
-        <HugeiconsIcon icon={Chart01Icon} className="m-4 h-8 w-8 md:hidden" />
+        <HugeiconsIcon icon={ThreeDRotateIcon} className="m-4 h-8 w-8 md:hidden" />
         
         <span className="hidden text-lg font-semibold md:block">Nexus</span>
       </div>
