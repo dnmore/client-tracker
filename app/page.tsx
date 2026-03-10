@@ -25,7 +25,7 @@ export default async function Page() {
       <Card className="w-full py-12 md:px-8 bg-zinc-50 dark:bg-neutral-900">
         <CardHeader>
           <CardTitle className="text-center text-3xl md:text-5xl font-extrabold">
-            Track Clients, Deals, and Revenue — All in One Place
+            Track Clients, Deals, Revenue — All in One Place
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
