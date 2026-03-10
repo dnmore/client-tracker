@@ -15,7 +15,7 @@ export default async function DashboardLayout({
     const session = await verifySession();
 
   return (
-    <div className="flex min-h-screen bg-muted/40">
+    <div className="flex min-h-screen w-full ">
       <Suspense fallback={<SidebarSkeleton />}>
         <ClientSidebar />
       </Suspense>
@@ -24,7 +24,7 @@ export default async function DashboardLayout({
         <Suspense fallback={<NavbarSkeleton />}>  <Navbar session={session} />
         </Suspense>
       
-        <main className="flex-1 p-6">{children}</main>
+        <main className="flex-1 p-6 bg-muted/40">{children}</main>
       </div>
     </div>
   );
