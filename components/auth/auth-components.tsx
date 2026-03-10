@@ -1,9 +1,10 @@
 import { signIn, signOut } from "@/lib/auth";
-import { Button } from "@/components/ui/button";
-import { HugeiconsIcon } from "@hugeicons/react";
+import { SignInButton } from "../ui/signin-button";
+import { HugeiconsIcon, type IconSvgElement } from "@hugeicons/react";
 import { Logout01Icon } from "@hugeicons/core-free-icons";
 
-export function SignIn({ provider }: { provider?: string }) {
+
+export function SignIn({ provider, icon}: { provider?: string, icon: IconSvgElement  }) {
   return (
     <form
       action={async () => {
@@ -11,7 +12,7 @@ export function SignIn({ provider }: { provider?: string }) {
         await signIn(provider, { redirectTo: "/dashboard" });
       }}
     >
-      <Button className="capitalize" size="lg">Signin with {provider}</Button>
+      <SignInButton provider={provider} icon={icon}/>
     </form>
   );
 }

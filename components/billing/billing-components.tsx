@@ -32,7 +32,7 @@ export function UpgradeButton({ userId, role }: { userId: string, role: "OWNER" 
 
   return (
     <GuardedButton onClick={handleUpgrade} role={role} requiredRole="OWNER">
-      {redirecting ? "Redirecting..." : "Upgrade to Pro – €15/month"}
+      {redirecting ? "Redirecting..." : "Upgrade to Pro"}
     </GuardedButton>
   );
 }

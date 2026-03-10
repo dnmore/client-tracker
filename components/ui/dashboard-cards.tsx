@@ -51,7 +51,7 @@ export function DashboardCard({
 
   const Icon = iconMap[type]
   return (
-    <Card >
+    <Card>
       <CardHeader>
         <CardTitle className={className}>
           <HugeiconsIcon
