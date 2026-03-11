@@ -2,7 +2,7 @@
 import { getDashboardStats } from "@/lib/data";
 import { Card, CardContent, CardHeader, CardTitle } from "./card";
 import { HugeiconsIcon } from '@hugeicons/react';
-import { LayerIcon, Chart01Icon , ArrowUp02Icon,  ArrowDown02Icon, User03Icon,  Invoice01Icon  } from '@hugeicons/core-free-icons';
+import { LayerIcon, Chart01Icon , ArrowUp02Icon,  ArrowDown02Icon, User03Icon,  Invoice01Icon, Crown03Icon  } from '@hugeicons/core-free-icons';
 import { verifySession } from "@/lib/dal";
 
 const iconMap = {
@@ -11,7 +11,7 @@ revenue: Chart01Icon ,
 won:ArrowUp02Icon,
 lost:  ArrowDown02Icon,
 leads:User03Icon,
-billing: Invoice01Icon
+billing: Crown03Icon
 }
 
 export default async function DashboardCards() {
@@ -32,7 +32,7 @@ export default async function DashboardCards() {
       <DashboardCard title="Deals Won" value={totalDealsWon} type="won" className="text-green-500" />
       <DashboardCard title="Deals Lost" value={totalDealsLost} type="lost" className="text-red-500"/>
       <DashboardCard title="Leads Created" value={totalLeads} type="leads" className="text-blue-500" />
-       <DashboardCard title="Billing" value={userPlan} type="billing" className="text-stone-500" />
+       <DashboardCard title="Billing" value={userPlan} type="billing" className="text-stone-800 dark:text-neutral-100" />
     </div>
   );
 }
@@ -51,7 +51,7 @@ export function DashboardCard({
 
   const Icon = iconMap[type]
   return (
-    <Card>
+    <Card className=" hover:ring-fuchsia-500">
       <CardHeader>
         <CardTitle className={className}>
           <HugeiconsIcon
