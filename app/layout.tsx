@@ -1,18 +1,10 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Noto_Sans } from "next/font/google";
+import { Geist, Geist_Mono, Noto_Sans, Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Footer } from "@/components/ui/footer";
 
-const notoSans = Noto_Sans({ variable: "--font-sans" });
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const inter = Inter({
   subsets: ["latin"],
 });
 
@@ -31,9 +23,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={notoSans.variable} suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col`}
+        className={`${inter.className} antialiased min-h-screen flex flex-col`}
       >
         <ThemeProvider
           attribute="class"
@@ -41,9 +33,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <div className="flex-1 flex flex-col">
-            {children}
-          </div>
+          <div className="flex-1 flex flex-col">{children}</div>
           <Footer />
         </ThemeProvider>
       </body>
