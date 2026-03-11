@@ -33,7 +33,7 @@ export function SignInButton({
       ) : (
         <>
           <HugeiconsIcon icon={icon} />
-          {`Sign in with ${provider}`}
+          {`Login in with ${provider}`}
         </>
       )}
     </Button>
