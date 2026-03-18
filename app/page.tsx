@@ -3,10 +3,15 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ModeToggle } from "@/components/ui/mode-toggle";
 import { HugeiconsIcon } from "@hugeicons/react";
-import { ThreeDRotateIcon, GithubIcon, GoogleIcon } from "@hugeicons/core-free-icons";
+import {
+  ThreeDRotateIcon,
+  GithubIcon,
+  GoogleIcon,
+  
+} from "@hugeicons/core-free-icons";
 
 import { SignIn } from "@/components/auth/auth-components";
-
+import { DemoSignIn } from "@/components/auth/auth-components";
 export default async function Page() {
   return (
     <main className="flex flex-col justify-center items-center gap-4 bg-background px-4 md:px-32">
@@ -30,14 +35,18 @@ export default async function Page() {
               Manage leads, track deal progress, and monitor your revenue in one
               clean workspace.
             </p>
-            <div className="flex flex-col md:flex-row justify-center items-center gap-2 mt-8">
-              
-              <Suspense fallback={<Button disabled>Loading...</Button>}>
-                <SignIn provider="google" icon={GoogleIcon} />
-              </Suspense>
-              <Suspense fallback={<Button disabled>Loading...</Button>}>
-                <SignIn provider="github" icon={GithubIcon} />
-              </Suspense>
+            <div className="flex flex-col gap-2 items-center justify-center">
+              <div className="flex flex-col md:flex-row justify-center items-center gap-2 mt-8">
+                <Suspense fallback={<Button disabled>Loading...</Button>}>
+                  <SignIn provider="google" icon={GoogleIcon} />
+                </Suspense>
+                <Suspense fallback={<Button disabled>Loading...</Button>}>
+                  <SignIn provider="github" icon={GithubIcon} />
+                </Suspense>
+              </div>
+               <Suspense fallback={<Button disabled>Loading...</Button>}>
+                  <DemoSignIn/>
+                </Suspense>
             </div>
           </CardContent>
         </Card>
