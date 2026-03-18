@@ -1,8 +1,9 @@
 import { signIn, signOut } from "@/lib/auth";
 import { SignInButton } from "../ui/signin-button";
 import { HugeiconsIcon, type IconSvgElement } from "@hugeicons/react";
-import { Logout01Icon } from "@hugeicons/core-free-icons";
-
+import { Logout01Icon, UserIcon } from "@hugeicons/core-free-icons";
+import { demoLogin } from "@/lib/demo-login";
+import { redirect } from "next/navigation";
 
 export function SignIn({ provider, icon}: { provider?: string, icon: IconSvgElement  }) {
   return (
@@ -29,6 +30,20 @@ export function SignOut() {
         <HugeiconsIcon icon={Logout01Icon} />
         Sign Out
       </button>
+    </form>
+  );
+}
+
+export function DemoSignIn() {
+  return (
+    <form
+      action={async () => {
+        "use server";
+        await demoLogin();
+        redirect("/dashboard");
+      }}
+    >
+      <SignInButton provider="demo" icon={UserIcon} />
     </form>
   );
 }
