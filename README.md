@@ -195,9 +195,11 @@ Analytics are computed server-side using database aggregation queries to ensure 
    pnpm install
 
    ```
-3. Configure environment variables
+3. Environment variables
 
-Create `.env` file in the root directory and configure environment variables (OAuth, database, Stripe test keys)
+The application uses environment variables for configuration.
+Copy the example file `.env.example` and fill in the required values.
+
 
 4. Run database migrations
 
