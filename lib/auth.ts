@@ -3,6 +3,14 @@ import { PrismaAdapter } from "@auth/prisma-adapter";
 import prisma from "@/lib/prisma";
 import GitHub from "next-auth/providers/github";
 import Google from "next-auth/providers/google";
+import { DEMO_MODE, ENABLE_OAUTH } from "./config";
+
+
+const providers = []
+
+if(ENABLE_OAUTH && !DEMO_MODE){
+  providers.push(GitHub, Google)
+}
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
   adapter: PrismaAdapter(prisma),
@@ -10,7 +18,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     strategy: "database",
   },
 
-  providers: [GitHub, Google],
+  providers,
   callbacks: {
     session({ session, user }) {
       session.user.id = user.id;

@@ -12,6 +12,7 @@ import {
 
 import { SignIn } from "@/components/auth/auth-components";
 import { DemoSignIn } from "@/components/auth/auth-components";
+import { DEMO_MODE } from "@/lib/config";
 export default async function Page() {
   return (
     <main className="flex flex-col justify-center items-center gap-4 bg-background px-4 md:px-32">
@@ -36,14 +37,27 @@ export default async function Page() {
               clean workspace.
             </p>
             <div className="flex flex-col gap-2 items-center justify-center">
-              <div className="flex flex-col md:flex-row justify-center items-center gap-2 mt-8">
-                <Suspense fallback={<Button disabled>Loading...</Button>}>
-                  <SignIn provider="google" icon={GoogleIcon} />
-                </Suspense>
-                <Suspense fallback={<Button disabled>Loading...</Button>}>
-                  <SignIn provider="github" icon={GithubIcon} />
-                </Suspense>
-              </div>
+              {!DEMO_MODE ? (
+    <div className="flex flex-col md:flex-row gap-2 mt-8">
+      <SignIn provider="google" icon={GoogleIcon} />
+      <SignIn provider="github" icon={GithubIcon} />
+    </div>
+  ) : ( <>
+  <div className="w-full bg-yellow-100 text-slate-900  text-center p-2 rounded-sm">
+    Demo Mode: OAuth disabled. Use demo account to explore.
+  </div>
+    <div className="flex flex-col md:flex-row gap-2">
+
+      <Button  size="lg" disabled className="opacity-50 capitalize flex items-center px-6 py-4 gap-2">
+        <HugeiconsIcon icon={GoogleIcon} />
+        Login With Google
+      </Button>
+      <Button  size="lg" disabled className="opacity-50 capitalize flex items-center px-6 py-4 gap-2">
+        <HugeiconsIcon icon={GithubIcon} />
+        Login With GitHub
+      </Button>
+    </div> </>
+  )}
                <Suspense fallback={<Button disabled>Loading...</Button>}>
                   <DemoSignIn/>
                 </Suspense>

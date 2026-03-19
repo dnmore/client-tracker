@@ -1,10 +1,11 @@
 import { verifySession } from "@/lib/dal";
 import { redirect } from "next/navigation";
+import { DEMO_MODE } from "./config";
 
 export async function requireOwner() {
   const session = await verifySession();
 
-  if (session.user.role !== "OWNER") {
+  if (DEMO_MODE || session.user.role !== "OWNER") {
       redirect("/dashboard");  
     
   }
