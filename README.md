@@ -1,6 +1,6 @@
 # Client Tracker 
 
-![Next.js](https://img.shields.io/badge/Next.js-16-black)
+![Next.js](https://img.shields.io/badge/Next.js-black)
 ![React](https://img.shields.io/badge/React-TypeScript-blue)
 ![Prisma](https://img.shields.io/badge/Prisma-ORM-2D3748)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-Neon-blue)
@@ -9,12 +9,21 @@
 
 Client Tracker is a CRM-style application designed for freelancers and small consultancies to track leads, deals and revenue in one place.
 
+## Live Demo
+
+[Live Demo](https://client-tracker-dashboard.vercel.app/)
+
+- No signup required  
+- Safe demo environment  
+- Read-only access  
+
 ## Table of Contents
 
 
 - [Preview](#preview)
 - [Features](#features)
 - [Tech Stack](#tech-stack)
+- [Authentication](#authentication)
 - [Role-Based Access Control](#role-based-access-control)
 - [Billing](#billing)
 - [Analytics](#analytics)
@@ -38,10 +47,12 @@ Client Tracker is a CRM-style application designed for freelancers and small con
 
 # Features
 
-- CRUD operations to create, view, edit and delete leads and deals  
-- Authentication and role-based access control (RBAC) 
-- Data aggregation and analytics
-- Subscription billing with Stripe
+- Full CRUD for leads and deals  
+- Authentication with role-based access control (RBAC)
+- Secure demo environment (no user data required)   
+- Server-side analytics and data aggregation  
+- Subscription billing with Stripe (test mode)  
+
 
 
 # Tech Stack
@@ -60,7 +71,48 @@ Client Tracker is a CRM-style application designed for freelancers and small con
 - Prisma ORM
 - PostgreSQL (Neon)
 - NextAuth (OAuth)
-- Stripe (Test Mode Billing)
+- Stripe (Test Mode)
+
+---
+
+# Authentication
+
+- NextAuth with Prisma adapter
+- OAuth providers (Google, GitHub)
+- Database session strategy
+
+## Authentication Modes
+
+The application supports two distinct modes controlled via environment variables.
+
+### Demo Mode 
+
+- OAuth providers disabled
+- Read-only access 
+- Uses seeded demo account
+
+```env
+NEXT_PUBLIC_DEMO_MODE=true
+ENABLE_OAUTH=false
+
+```
+Ensure your demo user email is defined in `prisma/seed.ts` and seeded before running the app.
+
+```bash
+
+pnpm dlx prisma db seed
+
+   ```
+
+### Full Mode
+
+Enable OAuth providers:
+
+```env
+NEXT_PUBLIC_DEMO_MODE=false
+ENABLE_OAUTH=true
+
+```
 
 ---
 
@@ -70,16 +122,21 @@ The application implements two roles:
 
 ## OWNER
 
-- Full access to all CRUD operations
-- Can view analytics
-- Can manage billing and subscriptions
+- Full CRUD access
+- Access to analytics
+- Manage billing and subscriptions
 
 ## VIEWER
 
-- Read-only access to leads and deals
+- Read-only access 
 - Can view analytics
-- Cannot modify data
-- Cannot manage billing
+- Cannot modify data or manage billing
+
+## Role Assignment
+
+- The first authenticated user is assigned the `owner` role
+- All subsequent users are assigned the `viewer` role
+
 
 ## Permission Matrix
 
@@ -107,7 +164,7 @@ Billing is implemented using **Stripe (test mode)**.
 
 - Deals limit is enforced at creation time
 - Existing deals can always be viewed
-- Billing actions are restricted to **Owners**
+- Billing actions are restricted to **Owners only**
 
 # Analytics 
 
@@ -138,7 +195,9 @@ Analytics are computed server-side using database aggregation queries to ensure 
    pnpm install
 
    ```
-3. Create `.env` file in the project root and configure environment variables (OAuth, database, Stripe test keys)
+3. Configure environment variables
+
+Create `.env` file in the root directory and configure environment variables (OAuth, database, Stripe test keys)
 
 4. Run database migrations
 
@@ -147,8 +206,16 @@ Analytics are computed server-side using database aggregation queries to ensure 
    pnpm prisma migrate dev
 
    ```
+5. Seed the database
 
-5. Start the development server
+
+```bash
+
+   pnpm dlx prisma db seed
+
+   ```
+
+6. Start the development server
 
 ```bash
 
@@ -165,14 +232,10 @@ Analytics are computed server-side using database aggregation queries to ensure 
    ```
 # Contributions
 
-Contributions are welcome!
-
-1. Fork the repository.
-2. Create a new branch (`feature/your-feature-name`).
-3. Commit changes with clear messages.
-4. Submit a pull request.
+Contributions are welcome.
+Feel free to open issues or submit pull requests.
 
 # License
 
-This project is licensed under the MIT License.
+MIT License
 
