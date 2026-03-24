@@ -18,7 +18,7 @@ describe("Dashboard Page", () => {
   });
 
   it("renders heading and description", async () => {
-    const Page = (await import("../app/dashboard/page")).default;
+    const Page = (await import("@/app/dashboard/page")).default;
 
     render(await Page());
 
@@ -33,7 +33,7 @@ describe("Dashboard Page", () => {
   });
 
   it("renders DashboardCards component", async () => {
-    const Page = (await import("../app/dashboard/page")).default;
+    const Page = (await import("@/app/dashboard/page")).default;
 
     render(await Page());
 
@@ -43,7 +43,7 @@ describe("Dashboard Page", () => {
   });
 
   it("does not show fallback when component resolves immediately", async () => {
-    const Page = (await import("../app/dashboard/page")).default;
+    const Page = (await import("@/app/dashboard/page")).default;
 
     render(await Page());
 

@@ -1,5 +1,7 @@
 import { render, screen } from "@testing-library/react";
 
+
+
 // Mock UI components
 jest.mock("@/components/ui/card", () => ({
   Card: ({ children }: any) => <div>{children}</div>,
@@ -43,7 +45,7 @@ describe("Page", () => {
 
   it("renders main heading and description", async () => {
     mockConfig(false);
-    const PageComp = (await import("../app/page")).default;
+    const PageComp = (await import("@/app/page")).default;
 
     render(await PageComp());
 
@@ -58,7 +60,7 @@ describe("Page", () => {
 
   it("renders OAuth sign-in buttons when DEMO_MODE is false", async () => {
     mockConfig(false);
-    const PageComp = (await import("../app/page")).default;
+    const PageComp = (await import("@/app/page")).default;
 
     render(await PageComp());
 
@@ -68,7 +70,7 @@ describe("Page", () => {
 
   it("renders demo mode UI when DEMO_MODE is true", async () => {
     mockConfig(true);
-    const PageComp = (await import("../app/page")).default;
+    const PageComp = (await import("@/app/page")).default;
 
     render(await PageComp());
 
@@ -87,7 +89,7 @@ describe("Page", () => {
 
   it("always renders DemoSignIn component", async () => {
     mockConfig(false);
-    const PageComp = (await import("../app/page")).default;
+    const PageComp = (await import("@/app/page")).default;
 
     render(await PageComp());
 
@@ -96,7 +98,7 @@ describe("Page", () => {
 
   it("renders ModeToggle", async () => {
     mockConfig(false);
-    const PageComp = (await import("../app/page")).default;
+    const PageComp = (await import("@/app/page")).default;
 
     render(await PageComp());
 
