@@ -18,31 +18,35 @@ type NavbarProps = {
 };
 
 export async function Navbar({ session }: NavbarProps) {
+
+  const userName = session.user?.name ?? "User"
+  const userRole = session.user?.role === "OWNER" ? "Owner" : "Viewer"
   return (
     <header className="flex h-14 items-center justify-between border-b bg-background px-6">
+      <nav aria-label="Main navigation" className="flex w-full items-center justify-between">
       <div className="text-sm font-medium">Dashboard</div>
       <div className="flex items-center gap-2">
-        <Badge variant="outline">
-          {session.user?.role === "OWNER" ? <p>OWNER</p> : <p>VIEWER</p>}
+        <Badge variant="outline" aria-label={`User role: ${userRole}`}>
+          {userRole}
         </Badge>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="h-8 w-8 rounded-full p-0">
+            <Button variant="ghost" className="h-8 w-8 rounded-full p-0" aria-label="Open user menu">
               <Avatar className="h-8 w-8">
                 <AvatarImage
-                  src={`${session.user?.image}`}
-                  alt={session.user.name ?? ""}
+                  src={`${session.user?.image ?? ""}`}
+                  alt={`${userName}'s profile picture`} 
                 />
-                <AvatarFallback>
+                <AvatarFallback aria-hidden="true">
                   <HugeiconsIcon icon={UserIcon} />
                 </AvatarFallback>
               </Avatar>
             </Button>
           </DropdownMenuTrigger>
 
-          <DropdownMenuContent align="end">
-            <DropdownMenuItem disabled>{session.user?.name}</DropdownMenuItem>
-            <DropdownMenuItem variant="destructive">
+          <DropdownMenuContent align="end" role="menu">
+            <DropdownMenuItem disabled>{userName}</DropdownMenuItem>
+            <DropdownMenuItem variant="destructive"  aria-label="Sign out">
               <SignOut />
             </DropdownMenuItem>
           </DropdownMenuContent>
@@ -52,6 +56,7 @@ export async function Navbar({ session }: NavbarProps) {
         </div>
         
       </div>
+      </nav>
     </header>
   );
 }
