@@ -13,13 +13,16 @@ import {
 import { SignIn } from "@/components/auth/auth-components";
 import { DemoSignIn } from "@/components/auth/auth-components";
 import { DEMO_MODE } from "@/lib/config";
+
+import { PainPoints } from "@/components/landing/painpoints";
+import { Features } from "@/components/landing/features";
 export default async function Page() {
   return (
-    <main className="flex flex-col justify-center items-center gap-4 bg-background px-4 md:px-32">
+    <div className="flex flex-col justify-center items-center gap-4 bg-background px-4 md:px-32">
       <div className="w-full flex justify-between items-center sticky top-0 left-0 p-4">
         <div className="flex gap-2 text-muted-foreground">
           <HugeiconsIcon icon={ThreeDRotateIcon} className="h-8 w-8" />
-          <p className="text-lg font-semibold">Nexus</p>
+          
         </div>
 
         <ModeToggle />
@@ -65,6 +68,28 @@ export default async function Page() {
           </CardContent>
         </Card>
       </div>
-    </main>
+
+       
+
+      {/* // Pain points */}
+      <PainPoints />
+      {/* // Features */}
+      <Features />
+      {/* // Demo */}
+      <section className="container mx-auto">
+        <div className="w-full py-12 px-4 md:px-8 flex flex-col gap-4 items-center justify-center text-center">
+          <h2 className="text-2xl md:text-4xl font-bold pt-8">
+            Explore before you commit.
+          </h2>
+
+          <p className="text-muted-foreground text-sm mb-4">
+            Try a pre-populated demo workspace: explore leads, deals, analytics,
+            and billing without creating an account.
+          </p>
+
+          <DemoSignIn />
+        </div>
+      </section>
+    </div>
   );
 }
