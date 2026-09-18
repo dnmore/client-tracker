@@ -51,7 +51,7 @@ export function DashboardCard({
 
   const Icon = iconMap[type]
   return (
-    <Card className=" hover:ring-fuchsia-500">
+    <Card className=" hover:shadow-xl/20 hover:-translate-y-2 transition-all duration-300 ease-in-out">
       <CardHeader>
         <CardTitle className={className}>
           <HugeiconsIcon
