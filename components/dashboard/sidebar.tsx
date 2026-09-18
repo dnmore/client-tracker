@@ -48,7 +48,7 @@ export function Sidebar() {
 
   return (
     <aside
-      className="flex h-auto w-16 flex-col border-r bg-background md:w-64"
+      className="flex h-auto w-16 flex-col border-r border-b rounded-b-lg bg-background md:w-64"
       aria-label="Sidebar"
     >
       <div className="flex h-14 items-center justify-center border-b md:justify-start md:px-6">
