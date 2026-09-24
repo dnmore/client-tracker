@@ -1,33 +1,29 @@
-import ClientSidebar from "@/components/dashboard/client-sidebar";
 import { Navbar } from "@/components/dashboard/navbar";
-import { Suspense } from "react";
-import {SidebarSkeleton, NavbarSkeleton} from "@/components/dashboard/dashboard-skeleton";
 import { verifySession } from "@/lib/dal";
+import { AppSidebar } from "@/components/dashboard/app-sidebar";
 
-
+import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 
 export default async function DashboardLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  
-    const session = await verifySession();
+  const session = await verifySession();
 
   return (
-    <div className="flex flex-1 w-full overflow-hidden">
-      <Suspense fallback={<SidebarSkeleton />}>
-        <ClientSidebar />
-      </Suspense>
-      
-      <div className="flex flex-1 flex-col overflow-hidden">
-        <Suspense fallback={<NavbarSkeleton />}>  <Navbar session={session} />
-        </Suspense>
-      
-        <main className="flex-1 overflow-auto p-4 md:p-6">
-        
-        {children}</main>
-      </div>
-    </div>
+    <main>
+      <Navbar session={session} />
+      <SidebarProvider
+        style={
+          {
+            "--sidebar-width": "19rem",
+          } as React.CSSProperties
+        }
+      >
+        <AppSidebar />
+        <SidebarInset>{children}</SidebarInset>
+      </SidebarProvider>
+    </main>
   );
 }

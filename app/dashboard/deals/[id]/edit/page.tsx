@@ -4,6 +4,17 @@ import { verifySession } from "@/lib/dal";
 import EditDealForm from "@/components/deals/edit-deal";
 import { notFound } from "next/navigation";
 import { getLeadsSelectOptions } from "@/lib/data";
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb";
+import { SidebarTrigger } from "@/components/ui/sidebar";
+
+
 
 export const metadata: Metadata = {
   title: 'Edit Deal',
@@ -21,10 +32,26 @@ export default async function Page(props: { params: Promise<{ id: string }> }){
         notFound();
       }
 
-    return (<div className="pt-6">
-          <h1 className="mb-2 text-xl md:text-2xl ml-1">Edit Deal</h1>
-          <div className="container py-10 max-w-lg">
-            <EditDealForm deal={dealToUpdate} leadsOptions={leadsData} role={session.user.role}/>
+    return (<div>
+          <header className="flex h-16 shrink-0 items-center gap-2 px-4">
+            <SidebarTrigger className="-ml-1" />
+    
+            <Breadcrumb>
+              <BreadcrumbList>
+                <BreadcrumbItem className="hidden md:block">
+                  <BreadcrumbLink href="#">Dashboard</BreadcrumbLink>
+                </BreadcrumbItem>
+                <BreadcrumbSeparator className="hidden md:block" />
+                <BreadcrumbItem>
+                  <BreadcrumbPage>Edit Deal</BreadcrumbPage>
+                </BreadcrumbItem>
+              </BreadcrumbList>
+            </Breadcrumb>
+          </header>
+          <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
+            <div className="container mx-auto py-10">
+               <EditDealForm deal={dealToUpdate} leadsOptions={leadsData} role={session.user.role}/>
+            </div>
           </div>
         </div>)
 }

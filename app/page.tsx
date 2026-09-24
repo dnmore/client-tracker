@@ -9,6 +9,7 @@ import {
   GoogleIcon,
   
 } from "@hugeicons/core-free-icons";
+import {Footer} from "@/components/layout/footer";
 
 import { SignIn } from "@/components/auth/auth-components";
 import { DemoSignIn } from "@/components/auth/auth-components";
@@ -90,6 +91,7 @@ export default async function Page() {
           <DemoSignIn />
         </div>
       </section>
+      <Footer />
     </div>
   );
 }
