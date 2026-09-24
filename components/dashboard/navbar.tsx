@@ -11,7 +11,7 @@ import type { Session } from "next-auth";
 import { Badge } from "@/components/ui/badge";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { UserIcon } from "@hugeicons/core-free-icons";
-import { ModeToggle } from "../ui/mode-toggle";
+
 
 type NavbarProps = {
   session: Session;
@@ -22,9 +22,9 @@ export async function Navbar({ session }: NavbarProps) {
   const userName = session.user?.name ?? "User"
   const userRole = session.user?.role === "OWNER" ? "Owner" : "Viewer"
   return (
-    <header className="flex h-14 items-center justify-between border-b bg-background px-6">
-      <nav aria-label="Main navigation" className="flex w-full items-center justify-between">
-      <div className="text-sm font-medium">Dashboard</div>
+   <header className="relative top-0 left-0 w-full px-6">
+      <nav aria-label="Main navigation" className="h-16 flex justify-end items-center">
+      
       <div className="flex items-center gap-2">
         <Badge variant="outline" aria-label={`User role: ${userRole}`}>
           {userRole}
@@ -46,14 +46,12 @@ export async function Navbar({ session }: NavbarProps) {
 
           <DropdownMenuContent align="end" role="menu">
             <DropdownMenuItem disabled>{userName}</DropdownMenuItem>
-            <DropdownMenuItem variant="destructive"  aria-label="Sign out">
+            <DropdownMenuItem aria-label="Sign out">
               <SignOut />
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
-        <div className="pl-4">
-          <ModeToggle />
-        </div>
+        
         
       </div>
       </nav>
