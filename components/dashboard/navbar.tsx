@@ -1,3 +1,4 @@
+import { ModeToggle } from "@/components/ui/mode-toggle";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -52,7 +53,7 @@ export async function Navbar({ session }: NavbarProps) {
           </DropdownMenuContent>
         </DropdownMenu>
         
-        
+        <ModeToggle/>
       </div>
       </nav>
     </header>
