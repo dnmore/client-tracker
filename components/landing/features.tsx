@@ -1,7 +1,6 @@
 "use client";
 
 import { motion } from "motion/react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { HugeiconsIcon } from "@hugeicons/react";
 import {
   UserGroupIcon,
@@ -47,22 +46,20 @@ const features = [
 
 export function Features() {
   return (
-    <Card className="w-full py-12 md:px-8 bg-zinc-50 dark:bg-neutral-900 text-center">
-      <CardHeader>
-        <CardTitle>
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            viewport={{ once: true }}
-            className="text-2xl md:text-4xl font-bold py-8"
-          >
-            Everything in one workspace
-          </motion.h2>
-        </CardTitle>
-      </CardHeader>
-      <CardContent>
-        <ul className="grid grid-cols-1 md:grid-cols-3">
+    <section className="w-full py-12 md:px-8  bg-linear-to-t from-primary/10 to-transparent dark:from-primary/40">
+      <div>
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          viewport={{ once: true }}
+          className="text-2xl md:text-4xl font-bold py-8 text-center "
+        >
+          Everything in one workspace
+        </motion.h2>
+      </div>
+      <div>
+        <ul className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8 p-4">
           {features.map((feature, index) => (
             <motion.li
               key={index}
@@ -70,15 +67,18 @@ export function Features() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.2 }}
               viewport={{ once: true }}
-              className="flex flex-col justify-center items-center gap-4 p-8"
+              className="flex w-full h-full flex-col gap-2 py-6 text-sm border shadow-sm rounded-xl bg-card text-card-foreground px-6"
             >
-              <HugeiconsIcon icon={feature.icon} />
+              <div className="flex aspect-square size-10 items-center justify-center rounded-lg text-indigo-500 bg-indigo-100 dark:bg-indigo-900 dark:text-indigo-300 text-base">
+                <HugeiconsIcon icon={feature.icon} />
+              </div>
+
               <p className="font-bold text-lg">{feature.title}</p>
               <p className="text-sm">{feature.description}</p>
             </motion.li>
           ))}
         </ul>
-      </CardContent>
-    </Card>
+      </div>
+    </section>
   );
 }
